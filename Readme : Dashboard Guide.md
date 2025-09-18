@@ -1,3 +1,5 @@
+![Dashboard](Dashboard.jpg)
+
 # 📊 Virtual Options Trading Dashboard (Python + Excel)
 
 This project is a live virtual trading simulator for Nifty, BankNifty, and Sensex options.  
