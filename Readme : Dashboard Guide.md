@@ -7,15 +7,15 @@ It’s like a flight simulator for traders: you experience the thrill of trading
 
 🗂 Dashboard Overview
 🔹 Market Data Inputs (Excel Sheet)
-Cell C2 (Spot Price LTP): Updates tick by tick with the live spot price of the index.
-Cell C3 (Lot Size): Shows the lot size of the selected index (e.g., Nifty = 75).
-Cell C3 (Max Lot / Order): Default = 24. If the entered lot exceeds this, orders are auto-sliced.
-Example: Entering 48 lots → 2 separate orders of 24 lots each (1800 qty each).
-Cell C4 (Expiry): Current expiry contract (always the most liquid).
-Cell C6 (Strike Price): User can enter strike here (default ATM ± 5 strikes available).
-Cells B6 & D6 (CE/PE LTP): Continuously updated based on the strike entered.
-Cell D1 (ATM): Displays the current At-The-Money strike based on spot.
-Cell D3 (Qty): Final trading quantity (Lot Size × Lots entered).
+> Cell C2 (Spot Price LTP): Updates tick by tick with the live spot price of the index.
+> Cell C3 (Lot Size): Shows the lot size of the selected index (e.g., Nifty = 75).
+> Cell C3 (Max Lot / Order): Default = 24. If the entered lot exceeds this, orders are auto-sliced.
+> Example: Entering 48 lots → 2 separate orders of 24 lots each (1800 qty each).
+> Cell C4 (Expiry): Current expiry contract (always the most liquid).
+> Cell C6 (Strike Price): User can enter strike here (default ATM ± 5 strikes available).
+> Cells B6 & D6 (CE/PE LTP): Continuously updated based on the strike entered.
+> Cell D1 (ATM): Displays the current At-The-Money strike based on spot.
+> Cell D3 (Qty): Final trading quantity (Lot Size × Lots entered).
 
 👉 Excel is used only for inputting strike, lot size, and target/stop loss.
 
