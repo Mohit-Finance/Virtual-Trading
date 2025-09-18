@@ -1,4 +1,4 @@
-![Dashboard](Dashboard.jpg)
+![Dashboard](Images/Dashboard.jpg)
 
 # 📊 Virtual Options Trading Dashboard (Python + Excel)
 
