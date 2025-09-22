@@ -59,7 +59,7 @@ This way, you don’t just practice trading — you **practice trading with rule
 
 ## ⏱ Simulated Market Latency
 
-To make the experience more realistic, all trades execute **2 seconds after you give the command**.  
+To make the experience more realistic, all trades (Entry & Exit) execute **2 seconds after you give the command**.  
 The **LTP you see on screen may have already moved**, teaching you how to manage **slippage and timing**, just like in a live market.
 
 ---
