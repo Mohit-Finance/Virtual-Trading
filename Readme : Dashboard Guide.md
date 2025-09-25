@@ -1,117 +1,155 @@
-![Dashboard](Images/Dashboard.jpg)
-
 # 📊 Virtual Options Trading Dashboard (Python + Excel)
 
-This project is a live virtual trading simulator for Nifty, BankNifty, and Sensex options.  
-It streams real-time option prices, lets you place buy/sell trades instantly, tracks P&L (including brokerage and charges), and logs your entire trading journey — all without risking real money.  
-It’s like a flight simulator for traders: you experience the thrill of trading in real market conditions, while learning discipline, margin management, and the impact of costs.
+This project is a **live virtual trading simulator** for Nifty, BankNifty, and Sensex options.  
+It streams real-time option prices, lets you place buy/sell trades instantly, executes automatic breakout/breakdown strategies, applies target and stop-loss orders, and maintains a complete trade history — all without risking real money.
+
+It’s like a **flight simulator for traders**: you experience real market conditions, practice automation logic, and learn discipline, margin control, and cost-awareness.
+
+![Dashboard](Images/Dashboard.jpg)
+
+---
 
 ## 🗂 Dashboard Overview
 
 ### 🔹 Market Data Inputs (Excel Sheet)
+- **Cell C2 (Spot Price LTP):** Live index spot price tick by tick.
+- **Cell C3 (Lot Size):** Lot size of the selected index (e.g., Nifty = 75).
+- **Cell C3 (Max Lot/Order):** Default = 24. Larger orders are auto-split.  
+  Example → Entering 48 lots = 2 × orders of 24 lots (1800 qty each).
+- **Cell C4 (Expiry):** Current expiry contract (always most liquid).
+- **Cell C6 (Strike Price):** Custom strike entry (ATM ± 5 strikes visible).
+- **Cells B6 & D6 (CE/PE LTP):** Auto-updating LTPs for strikes.
+- **Cell D1 (ATM):** Current At-The-Money strike.
+- **Cell D3 (Qty):** Final trading quantity (Lot Size × Lots entered).  
+👉 **Excel is used only for input (strike, lot, target/SL).**
 
-- Cell C2 (Spot Price LTP): Updates tick by tick with the live spot price of the index.
-- Cell C3 (Lot Size): Shows the lot size of the selected index (e.g., Nifty = 75).
-- Cell C3 (Max Lot / Order): Default = 24. If the entered lot exceeds this, orders are auto-sliced.
-- Example: Entering 48 lots → 2 separate orders of 24 lots each (1800 qty each).
-- Cell C4 (Expiry): Current expiry contract (always the most liquid).
-- Cell C6 (Strike Price): User can enter strike here (default ATM ± 5 strikes available).
-- Cells B6 & D6 (CE/PE LTP): Continuously updated based on the strike entered.
-- Cell D1 (ATM): Displays the current At-The-Money strike based on spot.
-- Cell D3 (Qty): Final trading quantity (Lot Size × Lots entered).  
-👉 Excel is used only for inputting strike, lot size, and target/stop loss.
+---
 
-### 🔹 Trade Summary (Day-Wise Log) – Table H2:K5
+## 🔀 Automated Entry Logic
 
-- Profit / Brokerage / Net Profit / Points Captured
-- Number of Winning Trades / Losing Trades / Total Trades  
-✔️ Resets daily  
-✔️ A detailed trade log is auto-saved in: `Credentials/Trade_log`
+To make trading fully automated, you can configure the type of order in **Cell C7** and specify the trigger price in **Cell B7 or D7** (depending on CE/PE).
 
-### 🔹 Target & Stop Loss Settings – Table H7:K9
+### 🔹 Breakout Buy Order (BBO)
+- Entered price **must be ABOVE current LTP**.  
+- When LTP rises to or beyond this price → **Buy order is triggered immediately**.  
+- Target and Stop Loss can be pre-set → making entry and exit automatic.
 
-- Pre-set Target and Stop Loss (entered in points, not ₹).
-- Entering 0 = no target or stop loss.
-- Both must be positive numbers.  
-- Table H11:K13 (Straddle Mode)  
-Special case for ATM Straddle (CE+PE same strike) trades.  
-If enabled (H11=1):  
-- If one leg hits Target/SL → only that leg is closed.  
-- Other leg continues until it also hits Target/SL.  
-- Can also enable combined Target/SL (cells I8 & I9).  
-- Default = H11=0 (inactive unless straddle is traded).
+### 🔹 Sell Breakdown Order (SBD)
+- Entered price **must be BELOW current LTP**.  
+- When LTP falls to or below this price → **Sell order is triggered automatically**.  
+- Target/Stop Loss can also be auto-applied (optional).
 
-### 🔹 Brokerage & Margin Calculator – Table M2:O12
+### 🔹 Buy Limit Order (BLO)
+- Entered price **must be BELOW current LTP**.  
+- When LTP touches or falls below this price → **Buy order is placed**.  
+- Used when you want to buy on dips.
 
-- Brokerage shown = Entry + Exit (round trip).
-- Updates automatically based on lots entered in C3 (press `r` to refresh).
-- Displays required margin for:
+### 🔹 Sell Limit Order (SLO)
+- Entered price **must be ABOVE current LTP**.  
+- When LTP touches or moves above this price → **Sell order is placed**.  
+- Used when you want to sell at higher levels.
+
+---
+
+## 🔹 Trade Summary (Day-Wise Log)
+(Table: H2:K5)
+- Profit / Brokerage / Net Profit / Points Captured  
+- Winning Trades / Losing Trades / Total Trades  
+✔️ **Resets daily** and auto-saves to: `Credentials/Trade_log`
+
+---
+
+## 🔹 Target & Stop Loss Settings
+(Table: H7:K9)
+- Enter target & stop loss in **points**, not ₹.  
+- Entering `0` = no target or SL.  
+- Both values must be **positive**.  
+
+Special Case: **Straddle Mode** (Table H11:K13)  
+- If enabled (`H11=1`):
+  - One leg hitting Target/SL closes only that leg.
+  - Other leg stays active until it hits its Target/SL.
+  - Option to set **combined target/SL** (cells I8 & I9).
+- Default = `H11=0` (inactive).
+
+---
+
+## 🔹 Brokerage & Margin Calculator
+(Table: M2:O12)
+- Brokerage = Entry + Exit (round trip).  
+- Updates automatically based on lots in C3 (`press r` to refresh).  
+- Shows required margin for:
   - Single-leg Buy/Sell trades  
   - Straddle Buy/Sell trades  
-✔️ Helps you estimate costs before placing any order.
+✔️ Helps estimate costs before placing an order.
 
-### 🔹 Live Trade Panel (Below the yellow line)
+---
 
-Displays live trade details tick by tick once you place an order:  
+## 🔹 Live Trade Panel
+(Displayed below the yellow line)
 - Instrument Token  
 - Signal (Buy/Sell)  
 - Strike Price & Option Type (CE/PE)  
 - Lot Size / Quantity  
 - Entry Price vs Current LTP  
 - Points Captured  
-- Gross Profit  
-- Brokerage Deducted  
-- Net Profit (₹)  
+- Gross Profit / Net Profit (₹)  
+- Brokerage deducted  
 - Gain %  
 - Margin Used  
 
-👉 Makes the simulator realistic, since it deducts brokerage and costs per trade — unlike broker terminals that only show net P&L per instrument.
+👉 Makes the simulator realistic with **per-trade P&L tracking (true cost)**.
+
+---
 
 ## 🎯 Key Features
-
 ✅ Live tick-by-tick LTP updates  
 ✅ Buy/Sell orders for CE/PE options (ATM ± 5 strikes)  
+✅ Automated entries: BBO, SBD, BLO, SLO  
 ✅ Straddle trading with leg-wise or combined Target/SL  
 ✅ Day-wise trade summary + auto trade log file  
-✅ Brokerage + margin calculator (entry + exit, all costs included)  
+✅ Brokerage + margin calculator (entry + exit, costs included)  
 ✅ Per-trade P&L tracking (unique USP)  
 ✅ Real-time Profit, Net Profit, and Gain % updates  
 
+---
+
 ## 🚀 How to Use
+1. **Open Excel file** → Input:
+   - Strike (C6)  
+   - Lot size (C3)  
+   - Target/Stop Loss (H7–K9)  
+   - Entry price & order type (B7/D7 + C7)  
+2. Keep CMD window active. All commands must be given there.  
+3. Place trades via hotkeys.  
+4. Track live P&L in the dashboard.  
+5. End of day → Review daily log in `Credentials/Trade_log`.
 
-Open Excel file → Input:  
-- Strike (C6)  
-- Lot size (C3)  
-- Target/Stop Loss (H7–K9)  
-
-Keep the CMD window active at all times.  
-All commands (Buy, Sell, Exit, Refresh `r`) must be given in the CMD window.  
-Excel is only for input fields (strike, lot, target/SL).  
-Place trades using keyboard hotkeys (see below).  
-Track live P&L in the trade panel.  
-End of day → Review daily trade log in: `Credentials/Trade_log`.  
+---
 
 ## ⚡ Hotkeys Reference (CMD Window)
+- CE Buy → `Z + UP`  
+- CE Sell → `Z + DOWN`  
+- PE Buy → `X + UP`  
+- PE Sell → `X + DOWN`  
+- ATM Straddle Buy → `B + UP`  
+- ATM Straddle Sell → `B + DOWN`  
+- Exit All → `DELETE × 2`  
+- Refresh Brokerage/Margin → `r`  
 
-- CE Buy → Z + UP  
-- CE Sell → Z + DOWN  
-- PE Buy → X + UP  
-- PE Sell → X + DOWN  
-- ATM Straddle Buy → B + UP  
-- ATM Straddle Sell → B + DOWN  
-- Exit All → DELETE × 2 (fast)  
-- Refresh Brokerage/Margin → r  
+👉 **CMD must be active** when pressing keys.
 
-👉 Important: CMD must be active when pressing these keys.
+---
 
 ## 📌 Why This Dashboard?
+Unlike broker platforms that only show per-instrument P&L, this simulator provides **per-trade insights after brokerage and taxes**.  
+It helps you:  
+- Understand the real cost of over-trading  
+- See how brokerage affects profits  
+- Train in discipline, risk, and trade management  
 
-Unlike broker platforms that only show net P&L per instrument, this simulator breaks down P&L per trade (after brokerage + taxes).  
-This helps you:  
-- See the true cost of over-trading  
-- Understand how brokerage eats into profits  
-- Train yourself in risk management & discipline
+---
 
-## ✨ In short
+## ✨ In Short
+This dashboard is the **safest way to practice live trading** — real-time, rule-based, cost-aware, and discipline-driven.
 
-This dashboard is the safest way to practice live trading — real-time, rule-based, cost-aware, and discipline-driven.
