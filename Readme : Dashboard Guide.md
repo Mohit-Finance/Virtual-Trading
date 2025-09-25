@@ -22,7 +22,7 @@ It’s like a **flight simulator for traders**: you experience real market condi
 - **Cells B6 & D6 (CE/PE LTP):** Auto-updating LTPs for strikes.
 - **Cell D1 (ATM):** Current At-The-Money strike.
 - **Cell D3 (Qty):** Final trading quantity (Lot Size × Lots entered).  
-👉 **Excel is used only for input (strike, lot, target/SL).**
+👉 **Excel is used only for input (strike, lot, target/SL, Automate Entry Order).**
 
 ---
 
