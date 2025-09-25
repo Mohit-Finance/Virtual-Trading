@@ -12,8 +12,9 @@ It’s like a **flight simulator for traders**: you experience real market condi
 ## 🗂 Dashboard Overview
 
 ### 🔹 Market Data Inputs (Excel Sheet)
-- **Cell C2 (Spot Price LTP):** Live index spot price tick by tick.
-- **Cell C3 (Lot Size):** Lot size of the selected index (e.g., Nifty = 75).
+- **Spot Price LTP:** Live index spot price tick by tick.
+- **Synthetic ATM Strike:** Live index spot price tick by tick.
+- **Cell C2 (Lot Size):** Lot size of the selected index (e.g., Nifty = 75).
 - **Cell C3 (Max Lot/Order):** Default = 24. Larger orders are auto-split.  
   Example → Entering 48 lots = 2 × orders of 24 lots (1800 qty each).
 - **Cell C4 (Expiry):** Current expiry contract (always most liquid).
