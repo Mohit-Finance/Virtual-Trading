@@ -60,6 +60,20 @@ To make trading fully automated, you can configure the type of order in **Cell C
 
 ---
 
+## ⚡ Hotkeys Reference (CMD Window) - Placing and Exiting Manual Order (Scalping)
+- CE Buy → `Z + UP`  
+- CE Sell → `Z + DOWN`  
+- PE Buy → `X + UP`  
+- PE Sell → `X + DOWN`  
+- ATM Straddle Buy → `B + UP`  
+- ATM Straddle Sell → `B + DOWN`  
+- Exit All → `DELETE × 2`  
+- Refresh Brokerage/Margin → `r`  
+
+👉 **CMD must be active** when pressing keys.
+
+---
+
 ## 🔹 Target & Stop Loss Settings
 (Table: H7:K9)
 - Enter target & stop loss in **points**, not ₹.  
@@ -125,20 +139,6 @@ Special Case: **Straddle Mode** (Table H11:K13)
 3. Place trades via hotkeys.  
 4. Track live P&L in the dashboard.  
 5. End of day → Review daily log in `Credentials/Trade_log`.
-
----
-
-## ⚡ Hotkeys Reference (CMD Window)
-- CE Buy → `Z + UP`  
-- CE Sell → `Z + DOWN`  
-- PE Buy → `X + UP`  
-- PE Sell → `X + DOWN`  
-- ATM Straddle Buy → `B + UP`  
-- ATM Straddle Sell → `B + DOWN`  
-- Exit All → `DELETE × 2`  
-- Refresh Brokerage/Margin → `r`  
-
-👉 **CMD must be active** when pressing keys.
 
 ---
 
